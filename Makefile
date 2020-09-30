@@ -3,6 +3,8 @@
 PACKAGE = thuthesis
 THESIS  = thuthesis-example
 SPINE   = spine
+# (DCMMC)
+THESIS_PROJECT = thuthesis-project
 
 SOURCES = $(PACKAGE).ins $(PACKAGE).dtx
 CLSFILE = dtx-style.sty $(PACKAGE).cls
@@ -18,9 +20,13 @@ else
 	RM = rm -f
 endif
 
-.PHONY: all all-dev clean distclean dist thesis viewthesis spine viewspine doc viewdoc cls check save savepdf test FORCE_MAKE
+# (DCMMC)
+.PHONY: all all-dev clean distclean dist thesis thesis-project viewthesis spine viewspine doc viewdoc cls check save savepdf test FORCE_MAKE
 
 thesis: $(THESIS).pdf
+
+# (DCMMC)
+thesis-project: $(THESIS_PROJECT).pdf
 
 all: thesis spine
 
@@ -34,6 +40,9 @@ $(CLSFILE): $(SOURCES)
 doc: $(PACKAGE).pdf
 
 spine: $(SPINE).pdf
+
+$(THESIS_PROJECT).pdf: cls FORCE_MAKE
+	$(LATEXMK) $(THESIS_PROJECT)
 
 $(PACKAGE).pdf: cls FORCE_MAKE
 	$(LATEXMK) $(PACKAGE).dtx
@@ -67,12 +76,14 @@ else
 	bash testfiles/test.sh $(target)
 endif
 
+# (DCMMC)
 clean:
-	$(LATEXMK) -c $(PACKAGE).dtx $(THESIS) $(SPINE)
+	$(LATEXMK) -c $(PACKAGE).dtx $(THESIS) $(SPINE) $(THESIS_PROJECT)
 	-@$(RM) -rf *~ main-survey.* main-translation.* _markdown_thuthesis* thuthesis.markdown.*
 
+# (DCMMC)
 cleanall: clean
-	-@$(RM) $(PACKAGE).pdf $(THESIS).pdf $(SPINE).pdf
+	-@$(RM) $(PACKAGE).pdf $(THESIS).pdf $(SPINE).pdf $(THESIS_PROJECT).pdf
 
 distclean: cleanall
 	-@$(RM) $(CLSFILE)
