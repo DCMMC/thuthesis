@@ -1749,8 +1749,12 @@
 % 我们的单面和双面模式与常规的不太一样。
 %    \begin{macrocode}
 \renewcommand\frontmatter{%
-  \cleardoublepage
-  \@mainmatterfalse
+% (DCMMC): 大作的封面后不需要空白页
+  \ifthu@degree@project
+  \else
+    \cleardoublepage
+    \@mainmatterfalse
+  \fi
   \pagenumbering{Roman}%
 }
 \renewcommand\mainmatter{%
@@ -3693,7 +3697,12 @@
 \newcommand\thu@titlepage@date{%
   \begingroup
     \def\CJKglue{\hskip 1bp}%
-    \sanhao\thu@format@date{\thu@date@zh@short}{\thu@date}\par
+% (DCMMC): 大作业采用lo精确到日的时间
+    \ifthu@degree@project
+      \sanhao\thu@format@date{\thu@date@zh@long}{\thu@date}\par
+    \else
+      \sanhao\thu@format@date{\thu@date@zh@short}{\thu@date}\par
+    \fi
   \endgroup
 }
 %    \end{macrocode}

@@ -21,6 +21,8 @@ You can edit `thesis-project.tex` and `thusetup.tex` and build your own project 
 make thesis-projct
 ```
 
+If you're not use make, you should first run `xetex thuthesis.ins` and then run `xelatex thuthesis-project; xelatex thuthesis-project; bibtex thuthesis-project; xelatex thuthesis-project` in powershell or bash.
+
 ## Clean the caches
 
 ```bash
