@@ -13,6 +13,8 @@ Big thanks to TUNA and other contributors of ThuThesis.
 Build and then read the `thesis-project.pdf` to learn basic usages of this template.
 You can edit `thesis-project.tex` and `thusetup.tex` and build your own project report.
 
+> In specific, you may need change `author`, `course`, `title`, and `studentid` in `thusetup.tex`.
+
 ## Build
 
 ```bash
